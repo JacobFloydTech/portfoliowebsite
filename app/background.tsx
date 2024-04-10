@@ -25,7 +25,7 @@ export default function Background() {
             squareElemeent.classList.add('square');
             const row = x % rowCount;
             const col = Math.floor(x / rowCount);
-            const delay = (Math.sqrt(row * col / 2)/3);
+            const delay = Math.sqrt((row * col / 2)/5)
             squareElemeent.style.animationDelay = `${delay}s`;
             el.appendChild(squareElemeent);
         }

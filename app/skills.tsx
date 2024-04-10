@@ -26,101 +26,132 @@ export default function Skills() {
         if (!el) { return; }
         const { left, top} = el.getBoundingClientRect();
         const { clientX, clientY } = mouse;
-        const offsetX = clientX - left 
-        const offsetY = clientY - top 
+        const offsetX = clientX - left
+        const offsetY = clientY - top
         el.style.setProperty('--frontendX', `${offsetX}px`);
         el.style.setProperty('--frontendY', `${offsetY}px`);
 
     }
 
+    const handleBorderBackgrounds = () => { 
+        const backend = Array.from(document.querySelectorAll(".borderBackground")) as HTMLElement[]
+        const frontend = Array.from(document.querySelectorAll('.borderBackgroundFrontend')) as HTMLElement[];
+        [backend, frontend].forEach((arr) => {
+            arr.forEach((e) => { 
+            const { left, top } = e.getBoundingClientRect();
+             document.addEventListener('mousemove', ({clientX, clientY}) => { 
+                 const offsetX = (clientX - left)*1.5;
+                 const offsetY = (clientY - top )*1.5;
+                 e.style.setProperty('--xPosition', `${offsetX}px`)
+                 e.style.setProperty('--yPosition', `${offsetY}px`)
+             })
+         })
+        })
+    }
+
     useEffect(() => { 
+        handleBorderBackgrounds();
         ['backend', 'frontend'].map(e => document.getElementById(e)).forEach((e) => { 
             if (!e) { return }
             gsap.fromTo(e, { 
                 opacity: 0,
+                translateY: '10%',
                 ease: 'sine'
             }, {
-                opacity: 1, scrollTrigger: { 
+                opacity: 1, translateY: '0%', scrollTrigger: { 
                     trigger: e,
                     scrub: true,
                     start: "-30% 50%",
                     end: '10% 50%'
             }})
         })
-    })
+    },[])
 
     return ( 
-        <div className="grid md:grid-cols-2 grid-cols-1  items-center justify-center gap-4 w-full 2xl:w-2/3 py-24 mx-auto text-white">
-            <div id='backend' onMouseEnter={() => document.addEventListener('mousemove', mouseBackendListener)} onMouseLeave={() => document.removeEventListener('mousemove', mouseBackendListener)} className="text-center  border-2 border-white backendSkillsContainer overflow-visible  p-4 rounded-2xl  mx-auto relative w-[90%] md:w-3/4 lg:w-1/2 xl:w-2/3">   
-                <GrainFilter/>
-                <h1 className="font-bold text-3xl pb-2">Backend skills</h1>
-                <ul className="bg-inherit mx-auto text-left w-2/3 p-0 md:pl-8 xl:pl-14  flex flex-col space-y-4 text-sm md:text-lg xl:text-[21px]">
-                    <li className="flex items-center space-x-2">
-                        <img className="w-8 aspect-square" src="/profileLogos/firebaseLogo.png" />
-                        <p className=" mix-blend-difference font-semibold ">Firebase</p>
-                    </li>
-                    <li className="flex items-center  space-x-2">
-                        <img className="w-8 aspect-square" src="/profileLogos/supabaselogo.png" />
-                        <p className="mix-blend-difference font-semibold ">Supabase</p></li>
-                    <li className="flex items-center  space-x-2">
-                        <img className="w-8 aspect-square" src="/profileLogos/postgresLogo.png"/>
-                        <p className="mix-blend-difference font-semibold ">MySQL/Postgres</p>
-                    </li>
-                    <li  className="flex items-center  space-x-2">
-                        <img className="w-8 aspect-square" src="/profileLogos/honoLogo.png"/>
-                        <p className="mix-blend-difference font-semibold ">Express & Hono</p>
-                    </li>
-                    <li className="flex items-center  space-x-2">
-                        <img className="w-8 aspect-square object-contain" src="/profileLogos/awsLogo.png"/>
-                        <p className="mix-blend-difference font-semibold ">AWS - Lambda, S3, & EC2 </p>
-                    </li>
-                    <li className="flex items-center  space-x-2">
-                        <AuthLogo/>
-                        <p className="mix-blend-difference font-semibold ">Authentication</p></li>
-                    <li className="flex items-center  space-x-2">
-              <img className="w-8 aspect-square object-contain" src="/profileLogos/mongoDBLogo.png"/>
-                        <p className="mix-blend-difference font-semibold ">MongoDB</p></li>
-                    </ul>
-    
+        <div className="grid md:grid-cols-2 grid-cols-1 items-center justify-center gap-4 w-full 2xl:w-2/3 py-24 mx-auto text-white">
+            <div id='backend' onMouseEnter={() => document.addEventListener('mousemove', mouseBackendListener)} onMouseLeave={() => document.removeEventListener('mousemove', mouseBackendListener)} className="text-center h-full overflow-hidden  backendSkillsContainer  rounded-xl  mx-auto relative w-[90%] md:w-3/4 lg:w-1/2 xl:w-2/3">   
+                <GrainFilter />
+                <div className='borderBackground top d w-full h-1' />
+                <div className='grid w-full h-[98%] grid-cols-[1%_98%_1%] relative'>
+                    <div className='w-full h-full borderBackground  left'/>
+                    <div className='rounded-2xl py-4'>
+                        <h1 className="font-bold text-3xl pb-2">Backend skills</h1>
+                        <ul className="bg-inherit w-2/3 mx-auto text-left  p-0 md:pl-8 xl:pl-14  flex flex-col space-y-4 text-sm md:text-lg xl:text-[21px]">
+                            <li className="flex items-center space-x-2">
+                                <img className="w-8 aspect-square" src="/profileLogos/firebaseLogo.png" />
+                                <p className=" mix-blend-difference font-semibold ">Firebase</p>
+                            </li>
+                            <li className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square" src="/profileLogos/supabaselogo.png" />
+                                <p className="mix-blend-difference font-semibold ">Supabase</p></li>
+                            <li className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square" src="/profileLogos/postgresLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">MySQL/Postgres</p>
+                            </li>
+                            <li  className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square" src="/profileLogos/honoLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">Express & Hono</p>
+                            </li>
+                            <li className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square object-contain" src="/profileLogos/awsLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">AWS - Lambda, S3, & EC2 </p>
+                            </li>
+                            <li className="flex items-center  space-x-2">
+                                <AuthLogo/>
+                                <p className="mix-blend-difference font-semibold ">Authentication</p></li>
+                            <li className="flex items-center  space-x-2">
+                    <img className="w-8 aspect-square object-contain" src="/profileLogos/mongoDBLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">MongoDB</p></li>
+                            </ul>
+                    </div>
+                    <div className='borderBackground w-full h-full right'/>
+                    </div>
+                <div className='borderBackground w-full h-1 bottom'/>
             </div>
             <div id="frontend" onMouseEnter={() => document.addEventListener('mousemove', mouseFrontendListener
-            )} onMouseLeave={() => document.removeEventListener('mousemove', mouseFrontendListener)} className="text-center frontendSkillsContainer mx-auto  w-[90%] md:w-3/4 lg:w-1/2 xl:w-2/3 border-2 p-4 h-full rounded-2xl flex flex-col 2xl:w-2/3 relative">
-                <h1 className="font-bold text-3xl">Frontend skills</h1>
-                <GrainFilter/>
-                <ul className=" w-2/3 mx-auto md:pl-8 xl:pl-14 flex flex-col space-y-2 text-xl justify-around h-full">
-                    <li className="flex space-x-2 text-center items-center">
-                        <ReactLogo />
-                        <p className="mix-blend-difference font-semibold" >React</p>
-                    </li>
-                    <li className="flex space-x-2 text-center items-center">
-                        <NextJSLogo />
-                        <p className="mix-blend-difference font-semibold" >Next JS</p>
-                    </li>
-                    <li className="flex space-x-2 text-center items-center">
-                        <img className="w-8 aspect-square" src="/profileLogos/svelteLogo.png" />
-                        <p className="mix-blend-difference font-semibold" >Svelte/SvelteKit</p>
-                    </li>
-                    <li className="flex space-x-2 text-center items-center">
-                        <img className="w-8 aspect-square" src="/profileLogos/solidLogo.png" />
-                        <p className="mix-blend-difference font-semibold" >Solid JS</p>
-                    </li>
-                     <li className="flex space-x-2 text-center items-center">
-                        <img className="w-8 aspect-square object-contain" src="/profileLogos/tailwindLogo.png" />
-                        <p className="mix-blend-difference font-semibold" >Tailwind CSS</p>
-                    </li>
-                    <li className="flex space-x-2 text-center items-center">
-                        <img className="w-8 aspect-square object-contain" src="/profileLogos/cssLogo.png"/>
-                        <p className="mix-blend-difference font-semibold" >CSS/Sass</p>
-                    </li>
-                    <li className="flex space-x-2 text-center items-center">
-                        <GSAPLogo />
-                        <p className="mix-blend-difference font-semibold" >GSAP</p>
-                    </li>
-                    <li className="flex space-x-2 text-center items-center">
-                        <img className='w-8 aspect-square object-contain' src="/profileLogos/threejsLogo.png" />
-                        <p className="mix-blend-difference font-semibold" >Three JS</p>
-                    </li>
-                </ul>
+            )} onMouseLeave={() => document.removeEventListener('mousemove', mouseFrontendListener)} className="text-center frontendSkillsContainer mx-auto  w-[90%] md:w-3/4 lg:w-1/2 xl:w-2/3 overflow-hidden  h-full rounded-lg flex flex-col 2xl:w-2/3 relative">
+        <GrainFilter />
+                <div className='borderBackgroundFrontend top d w-full h-1' />
+                <div className='grid w-full grid-cols-[1%_98%_1%] relative'>
+                    <div className='w-full h-full borderBackgroundFrontend  left'/>
+                    <div className='rounded-2xl py-4'>
+                        <h1 className="font-bold text-3xl pb-2">Frontend skills</h1>
+                        <ul className="bg-inherit w-2/3  mx-auto text-left  p-0 md:pl-8 xl:pl-14  flex flex-col space-y-4 text-sm md:text-lg xl:text-[21px]">
+                            <li className="flex items-center space-x-2">
+                                <ReactLogo/>
+                                <p className=" mix-blend-difference font-semibold ">React</p>
+                            </li>
+                            <li className="flex items-center  space-x-2">
+                                <NextJSLogo />
+                                <p className='mix-blend-difference font-semibold'>Next JS</p>
+                            </li>
+                            <li className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square" src="/profileLogos/svelteLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">Svelte/Sveltekit</p>
+                            </li>
+                            <li  className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square" src="/profileLogos/solidLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">Solid JS</p>
+                            </li>
+                            <li className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square object-contain" src="/profileLogos/tailwindLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">Tailwind CSS</p>
+                            </li>
+                            <li className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square" src="/profileLogos/cssLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">CSS/SCSS</p></li>
+                            <li className="flex items-center  space-x-2">
+                                <GSAPLogo/>
+                                <p className="mix-blend-difference font-semibold ">GSAP</p>
+                            </li>
+                             <li className="flex items-center  space-x-2">
+                                <img className="w-8 aspect-square" src="/profileLogos/threejsLogo.png"/>
+                                <p className="mix-blend-difference font-semibold ">Three JS</p></li>
+                            </ul>
+                    </div>
+                    <div className='borderBackgroundFrontend w-full h-full right'/>
+                    </div>
+                <div className='borderBackgroundFrontend w-full h-1 bottom'/>
             </div>
         </div>
     )
