@@ -40,8 +40,8 @@ export default function Skills() {
             arr.forEach((e) => { 
             const { left, top } = e.getBoundingClientRect();
              document.addEventListener('mousemove', ({clientX, clientY}) => { 
-                 const offsetX = (clientX - left)*1.5;
-                 const offsetY = (clientY - top )*1.5;
+                 const offsetX = (clientX - left)
+                 const offsetY = (clientY - top) * 2.5;
                  e.style.setProperty('--xPosition', `${offsetX}px`)
                  e.style.setProperty('--yPosition', `${offsetY}px`)
              })
@@ -82,7 +82,7 @@ export default function Skills() {
                                 <p className=" mix-blend-difference font-semibold ">Firebase</p>
                             </li>
                             <li className="flex items-center  space-x-2">
-                                <img className="w-8 aspect-square" src="/profileLogos/supabaselogo.png" />
+                                <img className="w-8 aspect-square" src="/profileLogos/supabaseLogo.png" />
                                 <p className="mix-blend-difference font-semibold ">Supabase</p></li>
                             <li className="flex items-center  space-x-2">
                                 <img className="w-8 aspect-square" src="/profileLogos/postgresLogo.png"/>
