@@ -2,11 +2,10 @@
 
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Skills() { 
-
     const mouseBackendListener = (mouse: MouseEvent) => {
         const el = document.getElementById('backend');
         
@@ -38,10 +37,12 @@ export default function Skills() {
         const frontend = Array.from(document.querySelectorAll('.borderBackgroundFrontend')) as HTMLElement[];
         [backend, frontend].forEach((arr) => {
             arr.forEach((e) => { 
-            const { left, top } = e.getBoundingClientRect();
-             document.addEventListener('mousemove', ({clientX, clientY}) => { 
-                 const offsetX = (clientX - left) * 1.2;
-                 const offsetY = (clientY - top) * 1.6;
+     
+                document.addEventListener('mousemove', ({ clientX, clientY }) => { 
+                const { left, top } = e.getBoundingClientRect();
+                 const offsetX = (clientX - left) 
+                 const offsetY = (clientY - top)
+                 console.log(offsetX, offsetY);
                  e.style.setProperty('--xPosition', `${offsetX}px`)
                  e.style.setProperty('--yPosition', `${offsetY}px`)
              })
@@ -50,29 +51,30 @@ export default function Skills() {
     }
 
     useEffect(() => { 
-    
-        document.addEventListener('mousemove', mouseFrontendListener);
-        document.addEventListener('mousemove', mouseBackendListener);
-        handleBorderBackgrounds();
-        ['backend', 'frontend'].map(e => document.getElementById(e)).forEach((e) => { 
-            if (!e) { return }
-            gsap.fromTo(e, { 
-                opacity: 0,
-                translateY: '10%',
-                ease: 'sine'
-            }, {
-                opacity: 1, translateY: '0%', scrollTrigger: { 
-                    trigger: e,
-                    scrub: true,
-                    start: "-30% 50%",
-                    end: '10% 50%'
-            }})
-        })
-    })
+            document.addEventListener('mousemove', mouseFrontendListener);
+            document.addEventListener('mousemove', mouseBackendListener);
+            handleBorderBackgrounds();
+            ['backend', 'frontend'].map(e => document.getElementById(e)).forEach((e) => { 
+                if (!e) { return }
+                gsap.fromTo(e, { 
+                    opacity: 0,
+                    translateY: '10%',
+                    ease: 'sine'
+                }, {
+                    opacity: 1, translateY: '0%', scrollTrigger: { 
+                        trigger: e,
+                        scrub: true,
+                        start: "-30% 50%",
+                        end: '10% 50%'
+                }})
+            })           
 
+            
+    }, [])
+   
     return ( 
         <div className="grid md:grid-cols-2 grid-cols-1 items-center justify-center gap-4 w-full 2xl:w-2/3 py-24 mx-auto text-white">
-            <div id='backend'  className="text-center h-full overflow-hidden  backendSkillsContainer  rounded-xl  mx-auto relative w-[90%] md:w-3/4 lg:w-1/2 xl:w-2/3">   
+            <div id='backend'  className="text-center h-full   backendSkillsContainer  rounded-xl  mx-auto relative w-[90%] md:w-3/4 lg:w-1/2 xl:w-2/3">   
                 <GrainFilter />
                 <div className='borderBackground top d w-full h-1' />
                 <div className='grid w-full h-[98%] grid-cols-[1%_98%_1%] relative'>
