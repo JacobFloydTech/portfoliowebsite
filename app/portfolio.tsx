@@ -12,7 +12,9 @@ export default function Portfolio() {
   useEffect(() => { 
     setGsapScaleAnimation();
     setTextAnimation();
-    animateText();
+    if (window.innerWidth >= 500) { 
+      animateText()
+    }
   }, [])
   const setGsapScaleAnimation = () => { 
     if (!ref.current) { return }

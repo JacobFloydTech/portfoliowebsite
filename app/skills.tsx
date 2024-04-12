@@ -6,12 +6,13 @@ import React, { useEffect, useState } from "react"
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Skills() { 
-    const mouseBackendListener = (mouse: MouseEvent) => {
+    const mouseBackendListener = (event: any) => {
         const el = document.getElementById('backend');
         
         if (!el) { return; }
         const { left, top} = el.getBoundingClientRect();
-        const { clientX, clientY } = mouse;
+        const clientX = ('touches' in event ? event.touches[0].clientX : event.clientX);
+        const clientY = ('touches' in event ? event.touches[0].clientY : event.clientY);
         const offsetX = clientX - left 
         const offsetY = clientY - top 
         el.style.setProperty('--backendX', `${offsetX}px`);
@@ -19,12 +20,14 @@ export default function Skills() {
 
     }
 
-    const mouseFrontendListener = (mouse: MouseEvent) => {
+    const mouseFrontendListener = (event: any) => {
         const el = document.getElementById('frontend');
         
         if (!el) { return; }
         const { left, top} = el.getBoundingClientRect();
-        const { clientX, clientY } = mouse;
+        const clientX = ('touches' in event ? event.touches[0].clientX : event.clientX);
+        const clientY = ('touches' in event ? event.touches[0].clientY : event.clientY);
+    
         const offsetX = clientX - left
         const offsetY = clientY - top
         el.style.setProperty('--frontendX', `${offsetX}px`);
@@ -38,37 +41,40 @@ export default function Skills() {
         [backend, frontend].forEach((arr) => {
             arr.forEach((e) => { 
      
-                document.addEventListener('mousemove', ({ clientX, clientY }) => { 
+                document.addEventListener('mousemove', (event: any) => { 
+              
+                 const { clientX, clientY } = ('touches' in event ? event.touches[0] : event);
                 const { left, top } = e.getBoundingClientRect();
                  const offsetX = (clientX - left) 
                  const offsetY = (clientY - top)
                  console.log(offsetX, offsetY);
                  e.style.setProperty('--xPosition', `${offsetX}px`)
-                 e.style.setProperty('--yPosition', `${offsetY}px`)
+                e.style.setProperty('--yPosition', `${offsetY}px`)
              })
          })
         })
     }
 
     useEffect(() => { 
-            document.addEventListener('mousemove', mouseFrontendListener);
-            document.addEventListener('mousemove', mouseBackendListener);
-            handleBorderBackgrounds();
-            ['backend', 'frontend'].map(e => document.getElementById(e)).forEach((e) => { 
-                if (!e) { return }
-                gsap.fromTo(e, { 
-                    opacity: 0,
-                    translateY: '10%',
-                    ease: 'sine'
-                }, {
-                    opacity: 1, translateY: '0%', scrollTrigger: { 
-                        trigger: e,
-                        scrub: true,
-                        start: "-30% 50%",
-                        end: '10% 50%'
-                }})
-            })           
-
+        ['mousemove', 'touchmove'].forEach((e) => { 
+            document.addEventListener(e, mouseFrontendListener);
+            document.addEventListener(e, mouseBackendListener);                
+        })
+        handleBorderBackgrounds();
+        ['backend', 'frontend'].map(e => document.getElementById(e)).forEach((e) => { 
+            if (!e) { return }
+            gsap.fromTo(e, { 
+                opacity: 0,
+                translateY: '10%',
+                ease: 'sine'
+            }, {
+                opacity: 1, translateY: '0%', scrollTrigger: { 
+                    trigger: e,
+                    scrub: true,
+                    start: "-30% 50%",
+                    end: '10% 50%'
+            }})
+        })           
             
     }, [])
    
