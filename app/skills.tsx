@@ -50,6 +50,9 @@ export default function Skills() {
     }
 
     useEffect(() => { 
+    
+        document.addEventListener('mousemove', mouseFrontendListener);
+        document.addEventListener('mousemove', mouseBackendListener);
         handleBorderBackgrounds();
         ['backend', 'frontend'].map(e => document.getElementById(e)).forEach((e) => { 
             if (!e) { return }
