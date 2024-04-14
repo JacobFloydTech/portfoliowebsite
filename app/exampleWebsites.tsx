@@ -38,11 +38,11 @@ function CarMarket() {
     const handleLeave = () => document.getElementById('carCover')?.classList.remove('animate');
     
     return ( 
-        <div onMouseEnter={() => handleOver()} onMouseLeave={() => handleLeave()} className="website rounded-3xl p-2 relative transition-all duration-150 hover:scale-[102%] hover:-translate-y-2  overflow-hidden">
-            <img className="rounded-3xl" src="carmarketsnapshot.jpeg" />
+        <button onClick={() => window.location.href = 'http://3.27.237.76/'} onMouseEnter={() => handleOver()} onMouseLeave={() => handleLeave()} className="website rounded-3xl p-2 relative transition-all duration-150 hover:scale-[102%] hover:-translate-y-2  overflow-hidden">
+            <img className="rounded-3xl" src="movieExampleWebsite.jpeg" />
             <GrainFilter/>
             <CarkMarketCover/>
-        </div>
+        </button>
     )
     function CarkMarketCover() { 
         return ( 
