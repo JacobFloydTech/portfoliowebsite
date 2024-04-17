@@ -9,100 +9,103 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Portfolio() {
   const ref = useRef<any>();
-  useEffect(() => { 
+  useEffect(() => {
     //setGsapScaleAnimation();
     setTextAnimation();
-    if (window.innerWidth >= 500) { 
-    //  animateText()
+    if (window.innerWidth >= 500) {
+      animateText()
     }
   }, [])
-  const setGsapScaleAnimation = () => { 
+  const setGsapScaleAnimation = () => {
     if (!ref.current) { return }
     const children = Array.from(ref.current.children ?? []) as HTMLElement[];
-    children.forEach((e, i) => { 
-      gsap.fromTo(e, {scale: 0.8},  {
-        scale: 1, scrollTrigger: { 
+    children.forEach((e, i) => {
+      gsap.fromTo(e, { scale: 0.8 }, {
+        scale: 1, scrollTrigger: {
           trigger: e,
           start: "-150% 30%",
           end: '-50% 5%',
-      }})
+        }
+      })
     })
   }
   
-  const setTextAnimation = () => { 
+  const setTextAnimation = () => {
     if (!ref.current) { return; }
     const children = Array.from(ref.current.children) as HTMLElement[];
-    children.forEach((e,i) => { 
+    children.forEach((e, i) => {
       setTimeout(() => {
-        if (e.id == 'helloWorldContainer') { 
+        if (e.id == 'helloWorldContainer') {
           Array.from(e.children).forEach((e) => e.classList.add('animate'))
-        } else { 
-           e.classList.add('animate')
+        } else {
+          e.classList.add('animate')
         }
        
-      }, i*400+200);
+      }, i * 400 + 200);
     })
   }
   const scrollInto = () => {
     const parent = document.getElementById('websiteContainer');
     if (!parent) return;
     parent.scrollIntoView({ behavior: "smooth" });
-    Array.from(parent.children).forEach((e) => { 
+    Array.from(parent.children).forEach((e) => {
       e.classList.add('animate')
     })
 
   }
-  const animateText  =() => { 
-    const el = document.getElementById('helloWorld')
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').map((e) => e.toLowerCase())
-    const originalString = el?.textContent;
-    if (!el || !originalString || originalString != 'Hello World') { return }
+  const animateText = () => {
+    const el = document.getElementById('helloWorld');
+    const secondEl = document.getElementById('helloWorld2');
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').map((e) => e.toLowerCase());
+    const originalString = el?.textContent ?? '';
+    
+    if (!el || !originalString || originalString !== 'Hello World' || !secondEl) {
+      return;
+    }
+
     let interval = 0;
-    const generate = setInterval(() => { 
-      if (interval >= originalString.length) { 
+    const generate = setInterval(() => {
+      if (interval >= originalString.length) {
         clearInterval(generate);
       }
       let s = originalString
         .split("")
         .splice(Math.floor(interval))
-        .map((e, i) =>  e == " " ? e : letters[Math.floor(Math.random() * letters.length)])
+        .map((e, i) => e === " " ? e : letters[Math.floor(Math.random() * letters.length)])
         .join("");
       s = originalString.split("").splice(0, Math.floor(interval)).join("") + s;
       el.textContent = s;
+      secondEl.textContent = s;
       interval += 0.1;
-    }, 50)
+    }, 50);
+  };
 
-
-
-
-
-  }
   
   return (
     <div className="z-50 w-full flex flex-col pt-24 justify-center items-center">
       <div id='profileImageContainer' className=" h-28 w-28 md:w-32 md:h-32 relative backdrop-blur-xl">
-     <img
-        className="w-full h-full mb-12 profilePicture absolute z-50 rounded-full shadow-2xl"
-        src="/picture.jpeg" />
-        <Circle/>
-        </div>
+        <img
+          className="w-full h-full mb-12 profilePicture absolute z-50 rounded-full shadow-2xl"
+          src="/picture.jpeg" />
+        <Circle />
+      </div>
       <div ref={ref} className="flex items-center pt-8 space-y-6 text-center justify-center flex-col relative">
-        <div id='helloWorldContainer' className="relative">
+        <div onMouseEnter={() => setTextAnimation()} id='helloWorldContainer' className="relative">
           <p id='helloWorld' className="p-2 bg-[rgba(137,137,137,0.1)] w-full h-full  backdrop-blur-[1.5px] rounded-3xl xl:text-8xl text-4xl md:text-5xl helloWorld introText font-bold text-white ">Hello World</p>
-           <p id='helloWorld2' className="absolute top-0  left-0   p-2 bg-[rgba(137,137,137,0.1)] w-full h-full   rounded-3xl xl:text-8xl text-4xl md:text-5xl helloWorld2 introText font-bold text-white ">Hello World</p>
+          <p id='helloWorld2' className="absolute top-0  left-0   p-2 bg-[rgba(137,137,137,0.1)] w-full h-full   rounded-3xl xl:text-8xl text-4xl md:text-5xl helloWorld2 introText font-bold text-white ">Hello World</p>
         </div>
         <p id="name" className="p-2 bg-[rgba(137,137,137,0.1)] backdrop-blur-[1.5px] p-x4 rounded-3xl xl:text-4xl text-xl md:text-2xl introText font-bold text-white">I'm Jacob</p>
         <p className="p-2 bg-[rgba(137,137,137,0.1)] backdrop-blur-[1.5px] p-x4 rounded-3xl xl:text-4xl text-xl md:text-2xl introText font-bold text-white">
           A CS Student interested in Web Development and AI
         </p>
-    </div>
+      </div>
       <button onClickCapture={() => scrollInto()} className="py-12">
-            <ExploreMoreButton/>
-        </button>
+        <ExploreMoreButton />
+      </button>
     </div>
   );
-}
 
+}
 function ExploreMoreButton() {
   return (
     <svg viewBox="0 0 200 200" width="100" className="bg-black rounded-full buttonBackdrop" height="100" xmlns="http://www.w3.org/2000/svg">
