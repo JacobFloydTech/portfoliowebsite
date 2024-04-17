@@ -10,10 +10,10 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Portfolio() {
   const ref = useRef<any>();
   useEffect(() => { 
-    setGsapScaleAnimation();
+    //setGsapScaleAnimation();
     setTextAnimation();
     if (window.innerWidth >= 500) { 
-      animateText()
+    //  animateText()
     }
   }, [])
   const setGsapScaleAnimation = () => { 
@@ -34,7 +34,12 @@ export default function Portfolio() {
     const children = Array.from(ref.current.children) as HTMLElement[];
     children.forEach((e,i) => { 
       setTimeout(() => {
-        e.classList.add('animate')
+        if (e.id == 'helloWorldContainer') { 
+          Array.from(e.children).forEach((e) => e.classList.add('animate'))
+        } else { 
+           e.classList.add('animate')
+        }
+       
       }, i*400+200);
     })
   }
@@ -81,9 +86,12 @@ export default function Portfolio() {
         src="/picture.jpeg" />
         <Circle/>
         </div>
-      <div ref={ ref} className="flex items-center pt-8 space-y-6 text-center justify-center flex-col">
-        <p  onMouseOver={() => animateText()} id='helloWorld' className="p-2 bg-[rgba(137,137,137,0.1)] backdrop-blur-[1.5px] p-x4 rounded-3xl xl:text-8xl text-4xl md:text-5xl helloWorld introText font-bold text-white ">Hello World</p>
-        <p className="p-2 bg-[rgba(137,137,137,0.1)] backdrop-blur-[1.5px] p-x4 rounded-3xl xl:text-4xl text-xl md:text-2xl introText font-bold text-white">I'm Jacob</p>
+      <div ref={ref} className="flex items-center pt-8 space-y-6 text-center justify-center flex-col relative">
+        <div id='helloWorldContainer' className="relative">
+          <p id='helloWorld' className="p-2 bg-[rgba(137,137,137,0.1)] w-full h-full  backdrop-blur-[1.5px] rounded-3xl xl:text-8xl text-4xl md:text-5xl helloWorld introText font-bold text-white ">Hello World</p>
+           <p id='helloWorld2' className="absolute top-0  left-0   p-2 bg-[rgba(137,137,137,0.1)] w-full h-full   rounded-3xl xl:text-8xl text-4xl md:text-5xl helloWorld2 introText font-bold text-white ">Hello World</p>
+        </div>
+        <p id="name" className="p-2 bg-[rgba(137,137,137,0.1)] backdrop-blur-[1.5px] p-x4 rounded-3xl xl:text-4xl text-xl md:text-2xl introText font-bold text-white">I'm Jacob</p>
         <p className="p-2 bg-[rgba(137,137,137,0.1)] backdrop-blur-[1.5px] p-x4 rounded-3xl xl:text-4xl text-xl md:text-2xl introText font-bold text-white">
           A CS Student interested in Web Development and AI
         </p>

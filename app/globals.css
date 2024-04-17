@@ -113,7 +113,16 @@
     background: linear-gradient(70deg, rgba(0,24,255,1) 0%, rgba(0,255,53,1) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: white;
 } 
+
+.helloWorld2 { 
+    background: linear-gradient(70deg, rgba(0,24,255,1) 0%, rgba(0,255,53,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: white;
+    filter: blur(10px) saturate(100%);
+}
 
 
 @keyframes profilePictureAnimation {
