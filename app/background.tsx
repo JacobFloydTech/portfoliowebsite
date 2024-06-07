@@ -11,41 +11,36 @@ export default function Background() {
                 requestAnimationFrame(updateAngle);
         };
         updateAngle();
-        
+        window.addEventListener('resize', setUpGrid)
+        return () => window.removeEventListener('resize', setUpGrid)
  
     }, [])
     const setUpGrid = () => { 
         const el = document.getElementById('customGrid');
-        let {amount, rowCount} = calculateRowCount();
-        if (!el) { return; }
-
    
-        for (var x = 0; x < 2000; x++) { 
-            const squareElemeent = document.createElement('div');
-            squareElemeent.classList.add('square');
-            const row = x % rowCount;
-            const col = Math.floor(x / rowCount);
-            const delay = Math.sqrt((row * col )/10 );
-            squareElemeent.style.animationDelay = `${delay}s`;
-            el.appendChild(squareElemeent);
+        if (!el) { return; }
+        let col = Math.floor(document.body.clientWidth / 22);
+        let row = Math.floor(document.body.clientHeight / 22);
+        for (var i = 0; i < col; i++) { 
+            for (var j = 0; j < row; j++) { 
+                const squareElemeent = document.createElement('div');
+                squareElemeent.classList.add('square');
+                const delay = (Math.sqrt(i/4 * j)/7)*2;
+                squareElemeent.style.animationDelay = `${delay}s`;
+                squareElemeent.id = `${i},${j}`
+                el.appendChild(squareElemeent);
+            }
         }
+
     }
 
-    const calculateRowCount = () => { 
-        const height = document.body.clientHeight;
-        const width = document.body.clientWidth;
-        const gridItemWidth = 75;
-        const rowCount = Math.floor(height / gridItemWidth);
-        const itemsPerRow = Math.floor(width / gridItemWidth);
-        const amount = rowCount * itemsPerRow;
-        return { amount, rowCount };
-    }
+
 
     return (
         <div id='backgroundContainer' className="overflow-x-hidden relative h-full w-screen">
             <div className=" w-full absolute background h-full -z-20" />
             <div className="fadeBackground z-50"/>
-            <div id='customGrid' className="customGrid overflow-hidden w-screen  p-0 m-0 mx-auto"/>
+            <div id='customGrid' className="customGrid overflow-hidden w-screen top-0 -translate-y-1  p-0 m-0 mx-auto"/>
         
             
         </div>

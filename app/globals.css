@@ -241,7 +241,7 @@ opacity: 100%;
         transform: scale(0.95);
     }
     50% { 
-        transform: scale(1.05);
+        transform: scale(1.02);
     }
     100% { 
         transform: scale(0.95)
@@ -249,7 +249,8 @@ opacity: 100%;
 }
 
 .square {
-    animation: both paddingChange infinite 3s;
+    animation: paddingChange infinite 3s;
+    animation-fill-mode: both;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     background-color: black;/* Repeating gradient pattern */
