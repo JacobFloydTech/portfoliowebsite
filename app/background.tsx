@@ -20,7 +20,7 @@ export default function Background() {
         if (!el) { return; }
 
    
-        for (var x = 0; x < 800; x++) { 
+        for (var x = 0; x < 2000; x++) { 
             const squareElemeent = document.createElement('div');
             squareElemeent.classList.add('square');
             const row = x % rowCount;

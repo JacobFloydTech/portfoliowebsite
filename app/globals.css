@@ -229,9 +229,9 @@ opacity: 100%;
     width: 110vw;
 
     display: grid;
-    gap: 5px;
-    grid-template-columns: repeat(auto-fill,75px); /* Automatically sized columns */
-    grid-auto-rows: 75px;
+    gap: 0.5px;
+    grid-template-columns: repeat(auto-fill,30px); /* Automatically sized columns */
+    grid-auto-rows: 30px;
 }
 
 

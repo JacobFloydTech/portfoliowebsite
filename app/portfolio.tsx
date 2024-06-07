@@ -10,26 +10,12 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Portfolio() {
   const ref = useRef<any>();
   useEffect(() => {
-    //setGsapScaleAnimation();
     setTextAnimation();
     if (window.innerWidth >= 500) {
       animateText()
     }
   }, [])
-  const setGsapScaleAnimation = () => {
-    if (!ref.current) { return }
-    const children = Array.from(ref.current.children ?? []) as HTMLElement[];
-    children.forEach((e, i) => {
-      gsap.fromTo(e, { scale: 0.8 }, {
-        scale: 1, scrollTrigger: {
-          trigger: e,
-          start: "-150% 30%",
-          end: '-50% 5%',
-        }
-      })
-    })
-  }
-  
+
   const setTextAnimation = () => {
     if (!ref.current) { return; }
     const children = Array.from(ref.current.children) as HTMLElement[];
