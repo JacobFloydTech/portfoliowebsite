@@ -27,7 +27,7 @@ export default function Portfolio() {
           e.classList.add('animate')
         }
        
-      }, i * 400 + 200);
+      }, i * 100);
     })
   }
   const scrollInto = () => {
@@ -62,19 +62,18 @@ export default function Portfolio() {
       s = originalString.split("").splice(0, Math.floor(interval)).join("") + s;
       el.textContent = s;
       secondEl.textContent = s;
-      interval += 0.1;
-    }, 50);
+      interval += 0.3;
+    }, 5);
   };
 
   
   return (
     <div className="z-50 w-full flex flex-col pt-24 justify-center items-center">
-      <div id='profileImageContainer' className=" h-28 w-28 md:w-32 md:h-32 relative backdrop-blur-xl">
-        <img
-          className="w-full h-full mb-12 profilePicture absolute z-50 rounded-full shadow-2xl"
+      <img
+          className="h-28 w-28 md:w-32 md:h-32 mb-12 profilePicture z-50 rounded-full"
           src="/picture.jpeg" />
-        <Circle />
-      </div>
+    
+   
       <div ref={ref} className="flex items-center pt-8 space-y-6 text-center justify-center flex-col relative">
         <div onMouseEnter={() => setTextAnimation()} id='helloWorldContainer' className="relative">
           <p id='helloWorld' className="p-2 bg-[rgba(137,137,137,0.1)] w-full h-full  backdrop-blur-[1.5px] rounded-3xl xl:text-8xl text-4xl md:text-5xl helloWorld introText font-bold text-white ">Hello World</p>
