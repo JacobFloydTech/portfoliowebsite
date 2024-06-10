@@ -47,7 +47,7 @@ export default function Skills() {
                 const { left, top } = e.getBoundingClientRect();
                  const offsetX = (clientX - left) 
                  const offsetY = (clientY - top)
-                 console.log(offsetX, offsetY);
+         
                  e.style.setProperty('--xPosition', `${offsetX}px`)
                 e.style.setProperty('--yPosition', `${offsetY}px`)
              })

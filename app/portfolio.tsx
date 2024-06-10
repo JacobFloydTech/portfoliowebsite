@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Circle from "./Circle";
+
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -27,7 +27,7 @@ export default function Portfolio() {
           e.classList.add('animate')
         }
        
-      }, i * 100);
+      }, i * 400 + 200);
     })
   }
   const scrollInto = () => {
@@ -62,15 +62,15 @@ export default function Portfolio() {
       s = originalString.split("").splice(0, Math.floor(interval)).join("") + s;
       el.textContent = s;
       secondEl.textContent = s;
-      interval += 0.3;
-    }, 5);
+      interval += 0.1;
+    }, 50);
   };
 
   
   return (
     <div className="z-50 w-full flex flex-col pt-24 justify-center items-center">
-      <img
-          className="h-28 w-28 md:w-32 md:h-32 mb-12 profilePicture z-50 rounded-full"
+       <img
+          className="h-28 w-28 md:w-32 md:h-32 mb-4 profilePicture z-50 rounded-full"
           src="/picture.jpeg" />
     
    
