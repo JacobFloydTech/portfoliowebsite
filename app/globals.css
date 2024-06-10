@@ -225,14 +225,14 @@ opacity: 100%;
 
 .customGrid {
     position: absolute;
-    padding-top: 2.5px;
+
     height: 100%;
-    width: 110vw;
+    width: 100vw;
 
     display: grid;
-    gap: 0.5px;
-    grid-template-columns: repeat(auto-fill,45px); /* Automatically sized columns */
-    grid-auto-rows: 45px;
+ 
+    grid-template-columns: repeat(auto-fill,80px); /* Automatically sized columns */
+    grid-auto-rows: 80px;
 }
 
 

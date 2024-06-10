@@ -19,13 +19,14 @@ export default function Background() {
         const el = document.getElementById('customGrid');
    
         if (!el) { return; }
-        let col = Math.floor(document.body.clientWidth / 22);
-        let row = Math.floor(document.body.clientHeight / 22);
+        let col = Math.floor(document.body.clientWidth / 160);
+
+       let row = Math.floor(document.body.clientWidth / 80);
         for (var i = 0; i < col; i++) { 
-            for (var j = 0; j < row; j++) { 
+            for (var j = 0; j < row; j++) {
                 const squareElemeent = document.createElement('div');
                 squareElemeent.classList.add('square');
-                const delay = (Math.sqrt(i/4 * j)/7)*2;
+                const delay = Math.sqrt((i * j) / 5) / 2.5;
                 squareElemeent.style.animationDelay = `${delay}s`;
                 squareElemeent.id = `${i},${j}`
                 el.appendChild(squareElemeent);
