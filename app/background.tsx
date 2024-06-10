@@ -19,7 +19,7 @@ export default function Background() {
         const el = document.getElementById('customGrid');
    
         if (!el) { return; }
-        let col = Math.floor(document.body.clientWidth / 160);
+        let col = Math.floor(document.body.clientWidth / 80);
 
        let row = Math.floor(document.body.clientWidth / 80);
         for (var i = 0; i < col; i++) { 
