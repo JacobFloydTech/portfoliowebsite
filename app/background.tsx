@@ -19,9 +19,10 @@ export default function Background() {
         const el = document.getElementById('customGrid');
    
         if (!el) { return; }
-        let col = Math.floor(document.body.clientWidth / 80);
+        let col = Math.ceil(document.documentElement.clientWidth /80);
 
-       let row = Math.floor(document.body.clientWidth / 80);
+        let row = Math.ceil(document.documentElement.scrollHeight/ 80);
+    
         for (var i = 0; i < col; i++) { 
             for (var j = 0; j < row; j++) {
                 const squareElemeent = document.createElement('div');
@@ -41,7 +42,7 @@ export default function Background() {
         <div id='backgroundContainer' className="overflow-x-hidden relative h-full w-screen">
             <div className=" w-full absolute background h-full -z-20" />
             <div className="fadeBackground z-50"/>
-            <div id='customGrid' className="customGrid overflow-hidden w-screen top-0 -translate-y-1  p-0 m-0 mx-auto"/>
+            <div id='customGrid' className="customGrid overflow-hidden w-full top-0 -translate-y-1  p-0 m-0 mx-auto"/>
         
             
         </div>
