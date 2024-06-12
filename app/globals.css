@@ -230,7 +230,6 @@ opacity: 100%;
     .customGrid {
         position: absolute;
         height: 100%;
-        width: 108vw;
 
 
         display: grid;
@@ -238,30 +237,6 @@ opacity: 100%;
         grid-template-columns: repeat(auto-fill,80px); /* Automatically sized columns */
         grid-auto-rows: 80px;
     }
-@media (min-width: 800px) {
-    .customGrid {
-        position: absolute;
-        height: 100%;
-
-        display: grid;
-    
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        grid-auto-rows: 80px;
-    }
-}
-@media (min-width: 1900px) { 
-
-    .customGrid {
-        position: absolute;
-        height: 100%;
-        width: 100vw;
-        display: grid;
-    
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        grid-auto-rows: 80px;
-    }
-}
-
 
 @keyframes paddingChange {
     0% { 

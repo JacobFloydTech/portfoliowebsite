@@ -80,7 +80,7 @@ export default function Skills() {
    
     return ( 
         <div className="grid md:grid-cols-2 grid-cols-1 items-center justify-center gap-4 w-full 2xl:w-2/3 py-24 mx-auto text-white">
-            <div id='backend'  className="text-center h-full   backendSkillsContainer  rounded-xl  mx-auto relative w-[90%] md:w-3/4 lg:w-1/2 xl:w-2/3">   
+            <div id='backend'  className="text-center h-full   backendSkillsContainer  rounded-xl  mx-auto relative w-[90%] md:w-3/4 lg:w-2/3">   
                 <GrainFilter />
                 <div className='borderBackground top d w-full h-1' />
                 <div className='grid w-full h-[98%] grid-cols-[1%_98%_1%] relative'>
@@ -119,7 +119,7 @@ export default function Skills() {
                     </div>
                 <div className='borderBackground w-full h-1 bottom'/>
             </div>
-            <div id="frontend"  className="text-center frontendSkillsContainer mx-auto  w-[90%] md:w-3/4 lg:w-1/2 xl:w-2/3 overflow-hidden  h-full rounded-lg flex flex-col 2xl:w-2/3 relative">
+            <div id="frontend"  className="text-center frontendSkillsContainer mx-auto  w-[90%] md:w-3/4 lg:w-2/3 overflow-hidden  h-full rounded-lg flex flex-col 2xl:w-2/3 relative">
         <GrainFilter />
                 <div className='borderBackgroundFrontend top  w-full h-1' />
                 <div className='grid w-full grid-cols-[1%_98%_1%] relative'>

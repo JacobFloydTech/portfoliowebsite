@@ -42,7 +42,7 @@ export default function Background() {
         <div id='backgroundContainer' className="overflow-x-hidden relative h-full w-screen">
             <div className=" w-full absolute background h-full -z-20" />
             <div className="fadeBackground z-50"/>
-            <div id='customGrid' className="customGrid overflow-hidden w-full top-0 -translate-y-1  p-0 m-0 mx-auto"/>
+            <div id='customGrid' className="customGrid overflow-hidden w-[120vw] md:w-[110vw] lg:w-[105vw] xl:w-[101vw] 3xl:w-[100vw] top-0 -translate-y-1  p-0 m-0 mx-auto"/>
         
             
         </div>
