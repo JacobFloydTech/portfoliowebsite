@@ -35,32 +35,13 @@ export default function Skills() {
 
     }
 
-    const handleBorderBackgrounds = () => { 
-        const backend = Array.from(document.querySelectorAll(".borderBackground")) as HTMLElement[]
-        const frontend = Array.from(document.querySelectorAll('.borderBackgroundFrontend')) as HTMLElement[];
-        [backend, frontend].forEach((arr) => {
-            arr.forEach((e) => { 
-     
-                document.addEventListener('mousemove', (event: any) => { 
-              
-                 const { clientX, clientY } = ('touches' in event ? event.touches[0] : event);
-                const { left, top } = e.getBoundingClientRect();
-                 const offsetX = (clientX - left) 
-                 const offsetY = (clientY - top)
-         
-                 e.style.setProperty('--xPosition', `${offsetX}px`)
-                e.style.setProperty('--yPosition', `${offsetY}px`)
-             })
-         })
-        })
-    }
+
 
     useEffect(() => { 
-        ['mousemove', 'touchmove'].forEach((e) => { 
+        ['mousemove', 'touchmove'].forEach((e) => {
             document.addEventListener(e, mouseFrontendListener);
-            document.addEventListener(e, mouseBackendListener);                
-        })
-        handleBorderBackgrounds();
+            document.addEventListener(e, mouseBackendListener);
+        });
         ['backend', 'frontend'].map(e => document.getElementById(e)).forEach((e) => { 
             if (!e) { return }
             gsap.fromTo(e, { 
@@ -80,11 +61,12 @@ export default function Skills() {
    
     return ( 
         <div className="grid md:grid-cols-2 grid-cols-1 items-center justify-center gap-4 w-full 2xl:w-2/3 py-24 mx-auto text-white">
-            <div id='backend'  className="text-center h-full   backendSkillsContainer  rounded-xl  mx-auto relative w-[90%] md:w-3/4 lg:w-2/3">   
+      
+            <div id='backend' className="text-center h-full   backendSkillsContainer  rounded-xl  mx-auto relative w-[90%] md:w-3/4 lg:w-2/3">   
                 <GrainFilter />
-                <div className='borderBackground top d w-full h-1' />
-                <div className='grid w-full h-[98%] grid-cols-[1%_98%_1%] relative'>
-                    <div className='w-full h-full borderBackground  left'/>
+                <SVG frontend={false}/>
+                <div className=' relative'>
+            
                     <div className='rounded-2xl py-4'>
                         <h1 className="font-bold text-3xl pb-2">Backend skills</h1>
                         <ul className="bg-inherit w-2/3 mx-auto text-left  p-0 md:pl-8 xl:pl-14  flex flex-col space-y-4 text-sm md:text-lg xl:text-[21px]">
@@ -115,15 +97,16 @@ export default function Skills() {
                                 <p className="mix-blend-difference font-semibold ">MongoDB</p></li>
                             </ul>
                     </div>
-                    <div className='borderBackground w-full h-full right'/>
+          
                     </div>
-                <div className='borderBackground w-full h-1 bottom'/>
+        
             </div>
-            <div id="frontend"  className="text-center frontendSkillsContainer mx-auto  w-[90%] md:w-3/4 lg:w-2/3 overflow-hidden  h-full rounded-lg flex flex-col 2xl:w-2/3 relative">
-        <GrainFilter />
-                <div className='borderBackgroundFrontend top  w-full h-1' />
-                <div className='grid w-full grid-cols-[1%_98%_1%] relative'>
-                    <div className='w-full h-full borderBackgroundFrontend  left'/>
+            <div id='frontend' className="text-center h-full frontendSkillsContainer  rounded-xl  mx-auto relative w-[90%] md:w-3/4 lg:w-2/3">
+                <GrainFilter />
+                <SVG frontend={true } />
+
+                <div className='relative'>
+       
                     <div className='rounded-2xl py-4'>
                         <h1 className="font-bold text-3xl pb-2">Frontend skills</h1>
                         <ul className="bg-inherit w-2/3  mx-auto text-left  p-0 md:pl-8 xl:pl-14  flex flex-col space-y-4 text-sm md:text-lg xl:text-[21px]">
@@ -159,13 +142,55 @@ export default function Skills() {
                                 <p className="mix-blend-difference font-semibold ">Three JS</p></li>
                             </ul>
                     </div>
-                    <div className='borderBackgroundFrontend w-full h-full right'/>
+              
                     </div>
-                <div className='borderBackgroundFrontend w-full h-1 bottom'/>
+           
             </div>
         </div>
     )
 }
+
+function SVG({ frontend }: {frontend: boolean}) {
+  const [xPosition, setX] = useState(50);
+  const [yPosition, setY] = useState(50);
+
+  useEffect(() => { 
+    const el = document.getElementById(frontend ? "frontend" : "backend");
+    if (!el) { return }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+      
+      setX(x);
+      setY(y);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+  
+  return (
+    <div className="top-0 overflow-hidden left-0 w-full h-full absolute -z-10">
+      <svg className="h-full w-full absolute top-0 left-0" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <mask id="Mask" maskContentUnits="userSpaceOnUse">
+            <rect width="100" height="100" fill="white" />
+            <rect x="1" y="1" width="98" height="98" fill="black" />
+          </mask>
+          <radialGradient id={`${frontend ? "frontend": 'backend'}grad`} cx={`${xPosition}%`} cy={`${yPosition}%`} r="50%" fx={`${xPosition}%`} fy={`${yPosition}%`}>
+            <stop offset="30%" style={{ stopColor: "rgb(255,255,255)", stopOpacity: 1 }} />
+            <stop offset="90%" style={{ stopColor: "rgb(0,0,0)", stopOpacity: 1 }} />
+          </radialGradient>
+        </defs>
+        <rect width="100" height="100" fill={`url(#${frontend ? "frontend": "backend"}grad)`} mask="url(#Mask)" />
+      </svg>
+    </div>
+  );
+}
+
+
 
 export function GrainFilter() { 
     return ( 
@@ -179,6 +204,8 @@ export function GrainFilter() {
         </svg>
     )
 }
+
+
 
 function AuthLogo() { 
     return (

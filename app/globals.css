@@ -65,6 +65,7 @@
 }
 
 
+
 .borderBackground.top { 
 
     background: radial-gradient(circle at var(--xPosition) var(--yPosition) , rgba(246,246,246,1) 30%, rgba(0,0,0,0) 90%);

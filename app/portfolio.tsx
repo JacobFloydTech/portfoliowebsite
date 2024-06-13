@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -91,6 +91,12 @@ export default function Portfolio() {
   );
 
 }
+import React from 'react';
+
+
+
+
+
 function ExploreMoreButton() {
   return (
     <svg viewBox="0 0 200 200" width="100" className="bg-black rounded-full buttonBackdrop" height="100" xmlns="http://www.w3.org/2000/svg">
