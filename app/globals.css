@@ -227,14 +227,10 @@ opacity: 100%;
 
 
 
-
     .customGrid {
         position: absolute;
         height: 100%;
-
-
         display: grid;
-    
         grid-template-columns: repeat(auto-fill,80px); /* Automatically sized columns */
         grid-auto-rows: 80px;
     }
