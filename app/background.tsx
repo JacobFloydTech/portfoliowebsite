@@ -22,7 +22,7 @@ export default function Background() {
         if (!el) { return; }
         let col = Math.ceil(document.documentElement.clientWidth /80);
 
-        let row = Math.ceil(document.documentElement.scrollHeight/ 80);
+        let row = Math.ceil(document.documentElement.scrollHeight/ 78);
     
         for (var i = 0; i < col; i++) { 
             for (var j = 0; j < row; j++) {
