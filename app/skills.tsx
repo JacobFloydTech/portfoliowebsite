@@ -158,17 +158,25 @@ function SVG({ frontend }: {frontend: boolean}) {
     const el = document.getElementById(frontend ? "frontend" : "backend");
     if (!el) { return }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const handleMouseMove = (event: any) => {
+        const rect = el.getBoundingClientRect();
+        const clientX = ('touches' in event ? event.touches[0].clientX : event.clientX);
+        const clientY = ('touches' in event ? event.touches[0].clientY : event.clientY);
+    
+        const x = ((clientX - rect.left) / rect.width) * 100;
+        const y = ((clientY - rect.top) / rect.height) * 100;
       
-      setX(x);
-      setY(y);
+        setX(x);
+        setY(y);
     };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => document.removeEventListener('mousemove', handleMouseMove);
+      ['mousemove', 'touchmove'].forEach((e) => {
+          document.addEventListener(e, handleMouseMove);
+      });
+      return () => {
+        ['mousemove', 'touchmove'].forEach((e) => {
+            document.removeEventListener(e, handleMouseMove);
+        });
+    }
   }, []);
   
   return (
