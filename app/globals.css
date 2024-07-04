@@ -15,6 +15,9 @@
     --frontendY: 200px;
     --rotateLogoBackground: -50deg;
 }
+html, body { 
+    overflow-x: hidden;
+}
 
 
 #profileImageContainer { 
