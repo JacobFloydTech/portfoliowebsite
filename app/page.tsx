@@ -3,6 +3,7 @@ import Background from "./background";
 import ExampleWebsites from "./exampleWebsites";
 import Portfolio from "./portfolio";
 import Skills from "./skills";
+import ContactForm from "./contactForm";
 
 export default function Page() { 
     return ( 
@@ -13,6 +14,7 @@ export default function Page() {
             <Portfolio />
             <ExampleWebsites />
             <Skills/>
+            <ContactForm/>
         </div>
     )
 }

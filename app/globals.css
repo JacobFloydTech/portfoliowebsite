@@ -290,3 +290,36 @@ html, body {
 }
 
 
+
+
+/* Hide spin buttons in WebKit browsers (Chrome, Safari, newer versions of Opera) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide spin buttons in Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Hide spin buttons in Internet Explorer */
+input[type=number]::-ms-clear,
+input[type=number]::-ms-reveal {
+  display: none;
+}
+
+#loading { 
+    animation: rotateSVG;
+    animation-duration: 450ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes rotateSVG { 
+    0% { 
+        transform: rotate(0deg);
+    } 100% { 
+        transform: rotate(360deg);
+    }
+}
