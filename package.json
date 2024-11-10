@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.115.0",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/postprocessing": "^2.16.3",
+    "@types/three": "^0.169.0",
     "gsap": "^3.12.5",
     "next": "14.1.4",
     "nodemailer": "^6.9.14",
+    "postprocessing": "^6.36.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "three": "^0.169.0"
   },
   "devDependencies": {
     "@types/node": "^20",
