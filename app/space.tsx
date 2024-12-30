@@ -71,7 +71,7 @@ export default function SpacePage() {
 
     },[])
     return (
-        <div ref={ref} className="h-screen m-0 p-0">
+        <div ref={ref} className="h-full m-0 p-0">
 
         </div>
     );
